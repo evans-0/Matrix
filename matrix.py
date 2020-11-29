@@ -4,8 +4,9 @@ class Matrix:
     """Creates a Matrix object"""
     def __init__(self, array=None):
         """Takes matrix as the argument"""
-
-        array = []
+        
+        if array==None:
+            array = []
         self.m = array
         self.r = len(array)
         try:
