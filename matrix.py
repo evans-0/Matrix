@@ -45,7 +45,7 @@ class Matrix:
                 l+=[row]
             return l
         else:
-            sys.stderr.write('Addition operation not defined')
+            sys.stderr.write('Addition operation not defined\n')
         
     def __sub__(self, other):
         """Subtracts two matrices"""
@@ -58,7 +58,7 @@ class Matrix:
                 l+=[row]
             return l
         else:
-            sys.stderr.write('Subtraction operation not defined')
+            sys.stderr.write('Subtraction operation not defined\n')
             
     def __mul__(self, other):
         """Multiplies two matrices
@@ -82,7 +82,7 @@ class Matrix:
                     l+=[row]
                 return l
             else:
-                sys.stderr.write('Vector matrix multiplication operation not defined')
+                sys.stderr.write('Vector matrix multiplication operation not defined\n')
     
     def det(self):
         """Returns the determinant of the matrix"""
@@ -115,7 +115,7 @@ class Matrix:
                    return d
             return cal(l)
         else:
-            sys.stderr.write('Determinant does not exist')
+            sys.stderr.write('Determinant does not exist\n')
     
     def transpose(self):
         """Returns the transpose of the matrix"""
@@ -163,7 +163,7 @@ class Matrix:
     def inverse(self):
         """Returns the inverse of the matrix if it exists"""
         if self.det()==0:
-            sys.stderr.write('Matrix is not invertible')
+            sys.stderr.write('Matrix is not invertible\n')
         elif len(self.m)==1:
             return self.m
         else:
