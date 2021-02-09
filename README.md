@@ -1,3 +1,3 @@
 # Matrix
 
-Implementation of matrix datatype using python
+Implementation of matrix datatype
