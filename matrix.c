@@ -27,11 +27,13 @@ int main()
     while (1)
     {
         int ch;
-        printf("\nMatrix Operations:\n\t1. Add\n\t2. Subtract\n\t3. Matrix Multiplication");
+        printf("\nMatrix Operations:\n\t1. Addition\n\t2. Subtraction\n\t3. Matrix Multiplication");
         printf("\n\t4. Scalar Multiplication\n\t5. Transpose\n\t6. Determinant\n\t7. Minor");
         printf("\n\t8. Cofactor\n\t9. Adjoint\n\t10. Inverse\n\t11. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &ch);
+
+        printf("Enter the order of matrix in <row>x<column> format!\n");
 
         if (ch==1) //Add
         {
@@ -53,10 +55,17 @@ int main()
                 view(M2);
                 printf("=\n");
                 view(sum);
+
+                free(M1.arr);
+                free(M2.arr);
+                free(sum.arr);
             }
             else
             {
                 printf("\nCan't add matrices with different orders.\n\n");
+
+                free(M1.arr);
+                free(M2.arr);
             }
         }
         else if (ch==2) // Subtract
@@ -79,10 +88,17 @@ int main()
                 view(M2);
                 printf("=\n");
                 view(diff);
+
+                free(M1.arr);
+                free(M2.arr);
+                free(diff.arr);
             }
             else
             {
                 printf("\nCan't subtract matrices with different orders.\n\n");
+
+                free(M1.arr);
+                free(M2.arr);
             }
         }
         else if (ch==3) // Matrix multiplication
@@ -101,10 +117,17 @@ int main()
                 printf("Product is\n\n");
                 Matrix result = mul(M1, M2);
                 view(result);
+
+                free(M1.arr);
+                free(M2.arr);
+                free(result.arr);
             }
             else
             {
                 printf("Matrix multiplication not defined.");
+
+                free(M1.arr);
+                free(M2.arr);
             }
         }
         else if (ch==4) // scalar multiplication
@@ -123,6 +146,9 @@ int main()
             printf("\nProduct\n");
             Matrix res = smul(M, s);
             view(res);
+
+            free(M.arr);
+            free(res.arr);
         }
         else if(ch==5)  // transpose
         {
@@ -138,6 +164,9 @@ int main()
             Matrix res = transpose(M);
             view(res);
 
+            free(M.arr);
+            free(res.arr);
+
         }
         else if (ch==6) // determinant
         {
@@ -150,10 +179,14 @@ int main()
             {
                 int res = det(M);
                 printf("\nDeterminant -> %d\n\n", res);
+
+                free(M.arr);
             }
             else
             {
                 printf("\nDeterminant does not exist.\n\n");
+
+                free(M.arr);
             }
         }
         else if (ch==7) // minor
@@ -163,18 +196,23 @@ int main()
             scanf("%dx%d", &r, &c);
             Matrix M = create(r, c);
             
-            printf("Original\n");
-            view(M);
-
             if (M.row==M.column)
             {
-            printf("\nMinor\n");
-            Matrix res = minor(M);
-            view(res);
+                printf("Original\n");
+                view(M);
+
+                printf("\nMinor\n");
+                Matrix res = minor(M);
+                view(res);
+
+                free(M.arr);
+                free(res.arr);
             }
             else
             {
-                printf("Minor does not exist.\n");
+                printf("\nMinor does not exist.\n");
+                
+                free(M.arr);
             }
         }
         else if (ch==8)  // cofactor
@@ -183,19 +221,24 @@ int main()
             printf("Enter order of Matrix: ");  // <row>x<column>
             scanf("%dx%d", &r, &c);
             Matrix M = create(r, c);
-            
-            printf("Original\n");
-            view(M);
-
+           
             if (M.row==M.column)
             {
-            printf("\nCofactor\n");
-            Matrix res = cofactor(M);
-            view(res);
+                printf("Original\n");
+                view(M);
+
+                printf("\nCofactor\n");
+                Matrix res = cofactor(M);
+                view(res);
+
+                free(M.arr);
+                free(res.arr);
             }
             else
             {
-                printf("Cofactor does not exist.\n");
+                printf("\nCofactor does not exist.\n");
+
+                free(M.arr);
             }
         }
         else if (ch==9)  // adjoint
@@ -205,18 +248,23 @@ int main()
             scanf("%dx%d", &r, &c);
             Matrix M = create(r, c);
             
-            printf("Original\n");
-            view(M);
-
             if (M.row==M.column)
             {
-            printf("\nAdjoint\n");
-            Matrix res = adjoint(M);
-            view(res);
+                printf("Original\n");
+                view(M);
+
+                printf("\nAdjoint\n");
+                Matrix res = adjoint(M);
+                view(res);
+
+                free(M.arr);
+                free(res.arr);
             }
             else
             {
-                printf("Adjoint does not exist.\n");
+                printf("\nAdjoint does not exist.\n");
+
+                free(M.arr);
             }
         }
         else if (ch==10) // inverse
@@ -226,18 +274,23 @@ int main()
             scanf("%dx%d", &r, &c);
             Matrix M = create(r, c);
 
-            printf("Original\n");
-            view(M);
-
             if ((det(M)==0) || (M.row!=M.column))
             {
-                printf("Inverse does not exist.\n");
+                printf("\nInverse does not exist.\n");
+
+                free(M.arr);
             }
             else
             {
+                printf("Original\n");
+                view(M);
+
                 Matrix I = inverse(M);  // Inverse
                 printf("\nInverse\n");
                 view(I);
+
+                free(M.arr);
+                free(I.arr);
             }
         }
         else if(ch==11)  //exit
@@ -251,7 +304,7 @@ int main()
     }
 }
 
-signed int exponent(int base, signed int pow)
+signed int exponent(int base, signed int pow)   // Exponent function
 {
     long double result = 1;
     if (pow>0)
@@ -271,7 +324,7 @@ signed int exponent(int base, signed int pow)
     return result;
 }
 
-Matrix create(int r, int c)
+Matrix create(int r, int c)        // Creating a matrix of r rows and c columns
 {
     Matrix M;
     M.row = r;
@@ -289,7 +342,7 @@ Matrix create(int r, int c)
     return M;
 }
 
-void view(Matrix m)
+void view(Matrix m)          // Displaying matrix
 {
     if ((m.row>0) && (m.column>0))
     {
@@ -304,7 +357,7 @@ void view(Matrix m)
     }
 }
 
-Matrix add(Matrix M1, Matrix M2)
+Matrix add(Matrix M1, Matrix M2)      // Addition of matrices
 {
     Matrix res;
     res.row = M1.row;
@@ -323,7 +376,7 @@ Matrix add(Matrix M1, Matrix M2)
     return res;
 }
 
-Matrix sub(Matrix M1, Matrix M2)
+Matrix sub(Matrix M1, Matrix M2)      // Subtraction of matrices
 {
     if ((M1.row==M2.row) && (M1.column==M2.column))
     {
@@ -352,7 +405,7 @@ Matrix sub(Matrix M1, Matrix M2)
     }
 }
 
-Matrix mul(Matrix M1, Matrix M2) //Vector multiplication
+Matrix mul(Matrix M1, Matrix M2) // Matrix multiplication
 {
     Matrix res;
     res.row = M1.row;
@@ -393,7 +446,7 @@ Matrix smul(Matrix M, float n) // Scalar multiplication
     return res;
 }
 
-Matrix transpose(Matrix M)
+Matrix transpose(Matrix M)     // Transpose of a matrix
 {
     Matrix res;
     res.row = M.column;
@@ -435,7 +488,7 @@ Matrix submatrix(Matrix M, int r, int c) // submatrix
     return res;
 }
 
-float det(Matrix M)
+float det(Matrix M)         // Determinant of a matrix
 {
     if (M.row==1)
     {
@@ -458,7 +511,7 @@ float det(Matrix M)
     }
 }
 
-Matrix minor(Matrix M)
+Matrix minor(Matrix M)         // Minor of a matrix
 {
     Matrix res;
     res.row = M.row;
@@ -482,7 +535,7 @@ Matrix minor(Matrix M)
     return res;
 }
 
-Matrix cofactor(Matrix M)
+Matrix cofactor(Matrix M)         // Cofactor of a matrix
 {
     Matrix res;
     res.row = M.row;
@@ -506,7 +559,7 @@ Matrix cofactor(Matrix M)
     return res;
 }
 
-Matrix adjoint(Matrix M)
+Matrix adjoint(Matrix M)          // Adjoint of a matrix
 {
     Matrix cf = cofactor(M);  // Cofactor
 
@@ -514,11 +567,10 @@ Matrix adjoint(Matrix M)
     return res;
 }
 
-Matrix inverse(Matrix M)
+Matrix inverse(Matrix M)       // Inverse of a matrix
 {
-    float d = 1/det(M); // determinant
-    Matrix ad = adjoint(M); //adjoint
-    printf("det -> %f, Inverse of det -> %f\n", det(M), d);
+    float d = 1/det(M);            // determinant
+    Matrix ad = adjoint(M);       //adjoint
     Matrix res = smul(ad, d);
 
     return res;
