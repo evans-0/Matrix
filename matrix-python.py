@@ -120,9 +120,9 @@ class Matrix:
     def transpose(self):
         """Returns the transpose of the matrix"""
         l1 = []
-        for i in range(self.r):
+        for i in range(self.c):
             l2 = []
-            for j in range(self.c):
+            for j in range(self.r):
                 l2.append(self.m[j][i])
             l1+=[l2]
         return l1
