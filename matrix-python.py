@@ -4,7 +4,7 @@ class Matrix:
     """Creates a Matrix object"""
     def __init__(self, array=None):
         """Takes matrix as the argument"""
-        
+
         if array==None:
             array = []
         self.m = array
@@ -65,10 +65,13 @@ class Matrix:
         For scalar multiplication give the second operand as an float and 
         the first operand as Matrix"""
         if type(other)==int:
-            for i in range(len(self.m)):
-                for j in range(len(self.m[0])):
-                    self.m[i][j] = other*self.m[i][j]
-            return self.m
+            l = []
+            for i in range(self.r):
+                row = []
+                for j in range(self.c):
+                    row.append(other*self.m[i][j])
+                l += [row]
+            return l
         else:
             if self.c==other.r:
                 l = []
@@ -178,7 +181,6 @@ class Matrix:
     def view(self):
         """Displays the matrix"""
         for i in self.m:
-            print('\t')
             for j in i:
                 print(j, end='   ')
             print()
