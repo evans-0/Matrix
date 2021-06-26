@@ -18,11 +18,11 @@ void matcpy(Matrix *dst, Matrix src)	// copy src matrix to dst matrix
     dst->c = src.c;
     dst->arr = malloc(dst->r * dst->c * sizeof(float));
     for (int i = 0; i < dst->r; i++)
-	    for (int j = 0; j < dst->c; j++)
-	    {
-	      int index = i*dst->c + j;
-	      dst->arr[index]  = src.arr[index];
-      }
+    	for (int j = 0; j < dst->c; j++)
+	{
+            int index = i*dst->c + j;
+	    dst->arr[index]  = src.arr[index];
+        }
 }
 
 void view(Matrix M)          // Displaying matrix
@@ -72,7 +72,7 @@ int mul(Matrix *M1, Matrix M2) // Matrix multiplication
 {
     if (M1->c == M2.r)
     {
-        float *arr = malloc(M1->r * M2.c * sizeof(float));
+    	float *arr = malloc(M1->r * M2.c * sizeof(float));
         for (int i = 0; i<M1->r; i++)
       	{
           for (int j = 0; j<M2.c; j++)
@@ -81,15 +81,15 @@ int mul(Matrix *M1, Matrix M2) // Matrix multiplication
             for (int k = 0; k<M1->c; k++)
               ele+=M1->arr[i*M1->c + k] * M2.arr[k*M2.c + j];
             arr[i*M2.c + j] = ele;
-	        }
-	     }
-	    M1->c = M2.c;
-	    free(M1->arr);
-	    M1->arr = arr;
-	    return 0;
+	  }
+	}
+    	M1->c = M2.c;
+    	free(M1->arr);
+    	M1->arr = arr;
+    	return 0;
    }
    else
-	    return 1;
+	return 1;
 }
 
 void smul(Matrix M, int n) // Matrix scalar multiplication
@@ -198,9 +198,9 @@ Matrix cofactor(Matrix M)
 Matrix adjoint(Matrix M)
 // Adjoint of a matrix
 {
-  Matrix res = cofactor(M);
-  transpose(&res);
-  return res;
+    Matrix res = cofactor(M);
+    transpose(&res);
+    return res;
 }
 
 int inverse(Matrix *M1, Matrix M2)
