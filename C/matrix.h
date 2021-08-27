@@ -1,12 +1,12 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-// matrix structure
 typedef struct {
   int r, c;
   float *arr;
 } Matrix;
 
+Matrix init(int r, int c); // initialise a matrix with r rows and c columns
 void create(Matrix *M); // create a matrix
 void matcpy(Matrix *dst, Matrix src);  // matrix copy
 void view(Matrix M);  // view the matrix
