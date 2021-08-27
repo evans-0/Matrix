@@ -3,6 +3,14 @@
 #include <math.h>
 #include "matrix.h"
 
+Matrix init(int r, int c)
+{
+	Matrix M;
+	M.r = r;
+	M.c = c;
+	return M;
+}
+
 void create(Matrix *M)
 {
     M->arr = malloc(M->r * M->c * sizeof(float));
@@ -18,11 +26,11 @@ void matcpy(Matrix *dst, Matrix src)	// copy src matrix to dst matrix
     dst->c = src.c;
     dst->arr = malloc(dst->r * dst->c * sizeof(float));
     for (int i = 0; i < dst->r; i++)
-    	for (int j = 0; j < dst->c; j++)
+	for (int j = 0; j < dst->c; j++)
 	{
-            int index = i*dst->c + j;
+	    int index = i*dst->c + j;
 	    dst->arr[index]  = src.arr[index];
-        }
+      	}
 }
 
 void view(Matrix M)          // Displaying matrix
@@ -31,10 +39,10 @@ void view(Matrix M)          // Displaying matrix
     {
         for (int i = 0; i < M.r; i++)
         {
-	        printf("[");
-          for (int j = 0; j < M.c; j++)
-            printf("%.2f ", *(M.arr + M.c*i + j));
-          printf("]\n");
+	    printf("[");
+            for (int j = 0; j < M.c; j++)
+                printf("%.2f ", *(M.arr + M.c*i + j));
+            printf("]\n");
         }
     }
 }
@@ -44,13 +52,13 @@ int add(Matrix M1, Matrix M2) // Addition of matrices
 {
     if ((M1.r == M2.r) && (M1.c == M2.c))
     {
-      for (int i = 0; i < M1.r; i++)
-	      for (int j = 0; j < M1.c; j++)
+        for (int i = 0; i < M1.r; i++)
+	    for (int j = 0; j < M1.c; j++)
 	        *(M1.arr + M1.c*i + j) += *(M2.arr + M1.c*i + j);
-      return 0;
+		return 0;
     }
     else
-      return 1;
+        return 1;
 }
 
 int sub(Matrix M1, Matrix M2) // Subtraction of matrices
@@ -58,13 +66,13 @@ int sub(Matrix M1, Matrix M2) // Subtraction of matrices
 {
     if ((M1.r == M2.r) && (M1.c == M2.c))
     {
-      for (int i = 0; i < M1.r; i++)
-	      for (int j = 0; j < M1.c; j++)
+        for (int i = 0; i < M1.r; i++)
+	    for (int j = 0; j < M1.c; j++)
   	        *(M1.arr + M1.c*i + j) -= *(M2.arr + M1.c*i + j);
-	    return 0;
+	return 0;
     }
     else
-    	return 1;
+      	return 1;
 }
 
 int mul(Matrix *M1, Matrix M2) // Matrix multiplication
@@ -72,31 +80,31 @@ int mul(Matrix *M1, Matrix M2) // Matrix multiplication
 {
     if (M1->c == M2.r)
     {
-    	float *arr = malloc(M1->r * M2.c * sizeof(float));
+        float *arr = malloc(M1->r * M2.c * sizeof(float));
         for (int i = 0; i<M1->r; i++)
       	{
-          for (int j = 0; j<M2.c; j++)
-          {
-            float ele = 0;
-            for (int k = 0; k<M1->c; k++)
-              ele+=M1->arr[i*M1->c + k] * M2.arr[k*M2.c + j];
-            arr[i*M2.c + j] = ele;
-	  }
+ 	    for (int j = 0; j<M2.c; j++)
+	    {
+	        float ele = 0;
+		for (int k = 0; k<M1->c; k++)
+		    ele+=M1->arr[i*M1->c + k] * M2.arr[k*M2.c + j];
+		arr[i*M2.c + j] = ele;
+	    }
 	}
-    	M1->c = M2.c;
-    	free(M1->arr);
-    	M1->arr = arr;
-    	return 0;
-   }
-   else
-	return 1;
+        M1->c = M2.c;
+        free(M1->arr);
+        M1->arr = arr;
+        return 0;
+    }
+    else
+        return 1;
 }
 
 void smul(Matrix M, int n) // Matrix scalar multiplication
 {
     for (int i = 0; i < M.r; i++)
         for (int j = 0; j < M.c; j++)
-	        *(M.arr + i*M.c + j) *= n;
+	    *(M.arr + i*M.c + j) *= n;
 }
 
 void transpose(Matrix *M)     // Transpose of a matrix
@@ -198,9 +206,9 @@ Matrix cofactor(Matrix M)
 Matrix adjoint(Matrix M)
 // Adjoint of a matrix
 {
-    Matrix res = cofactor(M);
-    transpose(&res);
-    return res;
+  Matrix res = cofactor(M);
+  transpose(&res);
+  return res;
 }
 
 int inverse(Matrix *M1, Matrix M2)
