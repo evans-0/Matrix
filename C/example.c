@@ -1,3 +1,4 @@
+// Usage example file
 #include <stdio.h>
 #include "matrix.h"
 
