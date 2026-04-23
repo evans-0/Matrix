@@ -100,7 +100,7 @@ int mul(Matrix *M1, Matrix M2) // Matrix multiplication
         return 1;
 }
 
-void smul(Matrix M, int n) // Matrix scalar multiplication
+void smul(Matrix M, float n) // Matrix scalar multiplication
 {
     for (int i = 0; i < M.r; i++)
         for (int j = 0; j < M.c; j++)
