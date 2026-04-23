@@ -13,7 +13,7 @@ void view(Matrix M);  // view the matrix
 int add(Matrix M1, Matrix M2);   // add two matrices
 int sub(Matrix M1, Matrix M2);   // subtract two matrices
 int mul(Matrix *M1, Matrix M2);   // matrix multiplication
-void smul(Matrix M, int n);   // scalar multiplication
+void smul(Matrix M, float n);   // scalar multiplication
 void transpose(Matrix *M);   // tranpose of a matrix
 int det(float *f, Matrix M);  // determinant of a matrix
 Matrix minor(Matrix M);  // minor of a matrix
